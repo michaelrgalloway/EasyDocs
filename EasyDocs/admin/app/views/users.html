@@ -1,0 +1,55 @@
+﻿
+
+   <div style="width:100%; margin-right:600px; position:relative; padding-top:50px">
+       <div id="content" class="content" style="margin-right:600px;">
+           
+           <button class="sectionEditButton" ng-click="addUser()">
+               <i class="add user icon"></i>
+           </button>
+         
+           <h2 class="ui center aligned icon header">
+               <i class="circular users icon"></i>
+               Admins
+           </h2>
+           <hr />
+           <div class="ui middle aligned divided list">
+               <div ng-repeat="user in users" class="item"  style="border-top:none;">
+                  
+                   <div class="left floated content">
+                       <i style="font-size:3em;" class="user icon"></i>
+                   </div>
+                   <div ng-hide="user.isAdd" class="right floated content">
+                       <button  ng-show="user.active" ng-click="toggleUser(user)" class="ui submit button">Disable</button>
+                       <button  ng-hide="user.active" ng-click="toggleUser(user)" class="ui submit button">Enable</button>
+                   </div>
+                       <div ng-hide="user.isAdd" class="content">
+                           {{user.email}}
+                       </div>
+                  
+                   <div ng-show="user.isAdd" class="ui fluid form">
+                       <div class="two fields">
+                           <div class="field">
+                               <label>Email</label>
+                               <input ng-model="user.UserName" placeholder="Email" type="text">
+                           </div>
+                           <div class="field">
+                               <label>Password (shown)</label>
+                               <input ng-model="user.Password"  type="text">
+                           </div>
+                           
+                       </div>
+                       <div class="right floated content">
+                           
+                           <button ng-click="commitUser(user)" ng-show="user.isAdd" class="ui submit button">Submit</button>
+                       </div>
+                   </div>
+                  
+                   </div>
+           </div>
+           
+       </div>
+       
+</div>
+
+   
+    <div style="clear:both;"></div>

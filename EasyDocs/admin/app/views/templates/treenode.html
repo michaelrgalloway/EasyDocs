@@ -1,0 +1,33 @@
+﻿
+<div class="nodeWrapper">
+    <a ng-show="!section.titleIsEdit" ng-dblclick="section.titleIsEdit = true" href="" ng-href="/admin/Section/{{section.urlKey}}" ng-init="section.expanded = false">
+        {{ section.title }}
+    </a>
+    <div class="titleEditText ui input" style="display:block;">
+        <input class="editTitle" placeholder="<name of new section>" style="padding:2px 3px; border-left:none; border-right:none; border-top:none;" ng-enter="addeditSectionCommit(section)" type="text" ng-show="section.titleIsEdit" ng-model="section.title" />
+    </div>
+    <div class="editButtons">
+        <button class="editButton" ng-click="section.titleIsEdit = !section.titleIsEdit">
+            <i class="edit icon"></i>
+        </button>
+        <button class="editButton" ng-click="addSection(section)" >
+            <i class="add circle icon"></i>
+        </button>
+        <button class="editButton" ng-click="deleteSection(section)" >
+            <i class="remove circle icon"></i>
+        </button>
+        <button class="editButton" ng-click="moveSection($index,-1)">
+            <i class="arrow up icon"></i>
+        </button>
+        <button class="editButton" ng-click="moveSection($index,+1)">
+            <i class="arrow down icon"></i>
+        </button>
+    </div>
+    <button class="toggleBotton" ng-show="section.sections.length > 0" ng-click="section.expanded = !section.expanded">
+        <i class="angle" ng-class="{ 'left icon': !section.expanded, 'down icon': section.expanded }"aria-hidden="true"></i>
+    </button>
+</div>
+<ul style="clear:both; border-left:1px solid #DCDCDC;" ng-show="section.expanded" ng-if="section.sections.length > 0">
+    <li ng-repeat="section in section.sections  track by $index" ng-include="'/admin/app/views/templates/treenode.html'">
+    </li>
+</ul>

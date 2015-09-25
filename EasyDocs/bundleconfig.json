@@ -1,0 +1,25 @@
+[
+  {
+    "outputFileName": "web/assets/scripts/bundle.js",
+    "inputFiles": [
+      "web/libs/angular-route.min.js",
+      "web/libs/angular-loader.min.js",
+      "web/libs/angular-resource.min.js",
+      "web/libs/angular-sanitize.min.js",
+      "web/libs/angular-local-storage.min.js",
+      "web/assets/scripts/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js",
+      "web/assets/scripts/util.js",
+      "web/app/app.js",
+      "web/app/services/settingsService.js",
+      "web/app/services/sectionService.js",
+      "web/app/services/searchService.js",
+      "web/app/services/pageService.js",
+      "web/app/services/loadingService.js",
+      "web/app/controllers/searchController.js",
+      "web/app/controllers/pageController.js",
+      "web/app/controllers/homeController.js",
+      "web/app/controllers/appController.js",
+      "web/assets/scripts/jquery.mCustomScrollbar.concat.min.js"
+    ]
+  }
+]

@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="DocEasyApp" ng-controller="appController" ng-cloak>
+<head>
+    <title></title>
+    <base href="/admin" />
+	<meta charset="utf-8" />
+    <link href="/admin/assets/styles/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.8/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/admin/assets/scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.8/semantic.min.js"></script>
+    <link href="/admin/assets/styles/site.css" rel="stylesheet" />
+    <script src="/admin/assets/scripts/util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" type="text/css" rel="stylesheet" />
+    <link href="/admin/assets/styles/message_default.css" rel="stylesheet" />
+    <script src="/admin/assets/scripts/message.js"></script>
+    <script src="/admin/libs/angular.min.js"></script>
+    <script src="/admin/libs/angular-route.min.js"></script>
+    <script src="/admin/libs/angular-loader.min.js"></script>
+    <script src="/admin/libs/angular-resource.min.js"></script>
+    <script src="/admin/libs/angular-sanitize.min.js"></script>
+    <script src="/admin/libs/angular-local-storage.min.js"></script>
+    <script src="/admin/app/app.js"></script>
+    <!--Services-->
+    <script src="/admin/app/services/dialogService.js"></script>
+    <script src="/admin/app/services/sectionService.js"></script>
+    <script src="/admin/app/services/pageService.js"></script>
+    <script src="/admin/app/services/settingsService.js"></script>
+    <script src="/admin/app/services/userService.js"></script>
+    <script src="/admin/app/services/searchService.js"></script>
+    <!--Controllers-->
+    <script src="/admin/app/controllers/appController.js"></script>
+    <script src="/admin/app/controllers/homeController.js"></script>
+    <script src="/admin/app/controllers/pageController.js"></script>
+    <script src="/admin/assets/scripts/ckeditor/ckeditor.js"></script>
+    <script src="/admin/app/controllers/userController.js"></script>
+    <script src="/admin/app/controllers/searchController.js"></script>
+    <link href="/admin/assets/scripts/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
+    <script src="/admin/assets/scripts/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+   
+</head>
+<body>
+    <div ng-include="editUrl"></div>
+    <div class="slide-animate" ng-include="headerUrl" include-replace></div>
+    <div style="width:100%; position:relative;">
+
+        <div id="leftTree"  style="border-right:#dcdcdc 1px solid; padding-top:60px; width:300px; position:fixed; height:100%;  left:0;">
+            <div style="margin-left:3em;" >
+                <div class="listHeader">
+                    <span class="nav-header"> Documentation</span>
+                    <button class="editButton" ng-click="addPage()">
+                        <i class="add circle icon"></i>
+                    </button>
+                </div>
+                <ul style="margin-top:0px;">
+                    <li ng-repeat="page in pages track by $index">
+                        <div class="nodeWrapper">
+                            <a ng-show="!page.titleIsEdit" ng-dblclick="page.titleIsEdit = true" href="" ng-href="admin/Page/{{page.urlKey}}">
+                                {{ page.title }}
+                            </a>
+                            <div class="titleEditText ui input" style="display:block;">
+                                <input style="padding:2px 3px; border-left:none; border-right:none; border-top:none;" ng-enter="addeditPageCommit(page)" type="text" ng-show="page.titleIsEdit" ng-model="page.title" />
+                            </div>
+                            <div class="editButtons" ng-hide="page.isNew">
+                                <button class="editButton" ng-click="page.titleIsEdit = !page.titleIsEdit">
+                                    <i class="edit icon"></i>
+                                </button>
+                        
+                                <button class="editButton" ng-click="deletePage(page)">
+                                    <i class="remove circle icon"></i>
+                                </button>
+                                <button class="editButton" ng-click="movePage($index,-1)">
+                                    <i class="arrow up icon"></i>
+                                </button>
+                                <button class="editButton" ng-click="movePage($index,+1)">
+                                    <i class="arrow down icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="listHeader">
+                    <span class="nav-header"> Definitions</span>
+                    <button class="editButton" ng-click="addSection(null)">
+                        <i class="add circle icon"></i>
+                    </button>
+                </div>
+                <ul style="margin-top:0px;">
+                    <li ng-repeat="section in sections track by $index" ng-include="'/admin/app/views/templates/treenode.html'"></li>
+                </ul>
+                <div class="listHeader">
+                    <a ng-href="admin/Users" class="nav-header"> Users</a>
+                   
+                </div>
+                <div class="listHeader">
+                    <a target="_self" href="/Logout" class="nav-header"> Logout</a>
+
+                </div>
+               
+            </div>
+        </div>
+        <div style="position:absolute; top:0; left:300px; margin-right:300px;width: 100%;">
+            <div style="width:100%;">
+                <div data-ng-view="">
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+
+       
+
+    </div>
+    <!--<div style="clear:both;"></div>
+    <div id="footer" class="slide-animate" ng-include="footerUrl"></div>-->
+
+    <script>
+		(function($){
+			$(window).load(function(){
+
+			    $("#leftTree").mCustomScrollbar({
+			        theme: "dark",
+			        position: "left",
+			        scrollInertia:200
+				});
+
+			});
+		})(jQuery);
+		
+		dhtmlx.message.expire = 5000; //time in milliseconds
+		
+    </script>
+    <div class="loader">
+        <img src="/admin/assets/img/713.GIF" />
+    </div>
+</body>
+</html>

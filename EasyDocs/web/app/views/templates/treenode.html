@@ -1,0 +1,15 @@
+﻿
+<div class="nodeWrapper">
+    <a href="" ng-href="/Section/{{section.urlKey}}" >
+        {{ section.title }}
+    </a>
+   
+    
+    <button class="toggleBotton" ng-show="section.sections.length > 0" ng-click="section.expanded = !section.expanded">
+        <i class="angle" ng-class="{ 'left icon': !section.expanded, 'down icon': section.expanded }"aria-hidden="true"></i>
+    </button>
+</div>
+<ul style="clear:both; border-left:1px solid #DCDCDC;" ng-show="section.expanded" ng-if="section.sections.length > 0">
+    <li ng-repeat="section in section.sections  track by $index" ng-include="'/web/app/views/templates/treenode.html'">
+    </li>
+</ul>

@@ -1,0 +1,33 @@
+﻿<div class="ui borderless menu fixed" style=" background-color:white; text-align:center;">
+   
+    <div class="item">
+        <img ng-src="{{header.logoUrl}}">
+    </div>
+    <div class="item">
+        {{header.headerText}}
+    </div>
+    <div class="item edit-settings">
+        <button class="sectionEditButton" ng-click="editHeader()">
+            <i class="edit icon"></i>
+        </button>
+    </div>
+    
+    <div class="right menu">
+        
+        <a class="item" ng-repeat="link in header.headerLinks" ng-href="{{link.url}}">
+           {{link.display}}
+        </a>
+       
+        <div class="item">
+            <div class="ui transparent icon input">
+                <input ng-enter="search(searchTerm)" ng-model="searchTerm" type="text" placeholder="Search...">
+                <button ng-click="search(searchTerm)">
+                    <i class="search link icon"></i>
+                </button>
+                <button ng-click="rebuildSearch()">
+                    <i class="refresh icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

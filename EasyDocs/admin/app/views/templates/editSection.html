@@ -1,0 +1,318 @@
+﻿
+<style>
+    .dropzone .dz-message {
+        margin:0;
+    }
+    .dropzone{
+        min-height:20px;
+        height:20px;
+        display:inline-block;
+        width:200px;
+        padding:15px;
+        border:none;
+    }
+</style>
+<div class="ui large modal editSection">
+   
+    <div class="header">
+        Edit Section
+    </div>
+    <textarea name="editor1" id="editor1" rows="40" cols="80">
+        {{selectedSection.content}}
+    </textarea>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+            <div class="ui blue ok inverted button" data-commit-type="draft">
+                <i class="remove icon"></i>
+                Save Draft
+            </div>
+            <div class="ui green approve inverted button" data-commit-type="publish">
+                <i class="checkmark icon"></i>
+                Publish
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui large modal editPage">
+   
+    <div class="header">
+        Edit Page
+    </div>
+    <textarea name="editor2" id="editor2" rows="40" cols="80">
+        {{selectedPage.content}}
+    </textarea>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+            <div class="ui blue ok inverted button">
+                <i class="remove icon"></i>
+                Save Draft
+            </div>
+            <div class="ui green approve inverted button">
+                <i class="checkmark icon"></i>
+                Publish
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui small modal editPageSidebar">
+    
+    <div class="header">
+        Edit Page Sidebar
+    </div>
+    <textarea name="editor3" id="editor3" rows="40" cols="40">
+        {{selectedPage.sideBarContent}}
+    </textarea>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+
+            <div class="ui green approve inverted button">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui basic modal deleteNode">
+   
+    <div class="header">
+        Delete Section?
+    </div>
+    <div class="image content">
+        <div class="image">
+            <i class="warning circle icon"></i>
+        </div>
+        <div class="description">
+            <p>Deleting this section will mark this section and all child sections as deleted</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="two fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui basic modal deletePage">
+   
+    <div class="header">
+        Delete Page?
+    </div>
+    <div class="image content">
+        <div class="image">
+            <i class="warning circle icon"></i>
+        </div>
+        <div class="description">
+            <p>Deleting this page will mark this page as deleted</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="two fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal editHeader">
+   
+    <div class="header">
+        Edit Header
+    </div>
+    <div style="width:100%;padding:20px;">
+        <h3 style="display:inline-block;">Logo</h3>
+        <div>
+            <div style="padding:3px 20px;">
+                 Url: <input id="logoUrl" style="width:500px;" type="text" ng-model="header.logoUrl" /> 
+                <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
+            </div>
+        </div>
+        <h3 style="display:inline-block;">Home Page Key</h3>
+        <div>
+            <div style="padding:3px 20px;">
+                Key: <input id="logoUrl" style="width:500px;" type="text" ng-model="header.homePage" />
+               
+            </div>
+        </div>
+        <h3 style="display:inline-block;">Header Text</h3>
+        <div>
+            <div style="padding:3px 20px;">
+               Message: <input style="width:500px;" type="text" ng-model="header.headerText" />
+            </div>
+        </div>
+        <h3 style="display:inline-block;">Links</h3>
+        <button style="display:inline-block;" ng-click="header.headerLinks.push({})">
+            <i class="add circle icon"></i>
+        </button>
+        <div ng-repeat="link in header.headerLinks">
+           
+            <div style="padding:3px 20px;">
+                Display: <input type="text" ng-model="link.display" required /> Url: <input style="width:300px;" type="text" ng-model="link.url" />
+                <button ng-click="removeHeaderLink(link);">
+                    <i class="remove circle icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+
+            <div class="ui green approve inverted button" data-commit-type="publish">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal editSectionSidebar">
+   
+    <div class="header">
+        Edit Resources
+    </div>
+    <div style="width:100%;padding:20px;">
+        <h3 style="display:inline-block;">Downloads</h3>
+        <button style="display:inline-block;" ng-click="selectedSection.downloads.push({})">
+            <i class="add circle icon"></i>
+        </button>
+        <div ng-repeat="download in selectedSection.downloads">
+
+            <div style="padding:3px 20px;">
+                Display: <input type="text" ng-model="download.title" required /> Url: <input style="width:300px;" type="text" ng-model="download.url" />
+                <button ng-click="removeNodeGeneric(selectedSection.downloads,download);">
+                    <i class="remove circle icon"></i>
+                </button>
+            </div>
+        </div>
+        <h3 style="display:inline-block;">Articles</h3>
+        <button style="display:inline-block;" ng-click="selectedSection.articles.push({})">
+            <i class="add circle icon"></i>
+        </button>
+        <div ng-repeat="article in selectedSection.articles">
+
+            <div style="padding:3px 20px;">
+                Display: <input type="text" ng-model="article.title" required /> Url: <input style="width:300px;" type="text" ng-model="article.url" />
+                <button ng-click="removeNodeGeneric(selectedSection.articles,article);">
+                    <i class="remove circle icon"></i>
+                </button>
+            </div>
+        </div>
+        <h3 style="display:inline-block;">Resources</h3>
+        <button style="display:inline-block;" ng-click="selectedSection.externalLinks.push({})">
+            <i class="add circle icon"></i>
+        </button>
+        <div ng-repeat="el in selectedSection.externalLinks">
+
+            <div style="padding:3px 20px;">
+                Display: <input type="text" ng-model="el.title" required /> Url: <input style="width:300px;" type="text" ng-model="el.url" />
+                <button ng-click="removeNodeGeneric(selectedSection.externalLinks,el);">
+                    <i class="remove circle icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+
+            <div class="ui green approve inverted button" data-commit-type="publish">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal editUrlKeySection">
+
+    <div class="header">
+        Edit Url Key
+    </div>
+    <div style="width:100%;padding:20px;">
+            <div style="padding:3px 20px;">
+                <b>Url:</b><span style="padding-left:15px;">/Section/</span> <input style="width:300px;" type="text" ng-model="selectedSection.urlKey" />
+                <div style="display:inline-block;" class="ui slider checkbox">
+                    <input ng-model="selectedSection.active" type="checkbox" name="newsletter">
+                    <label>Active</label>
+                </div>
+            </div> 
+    </div>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+
+            <div class="ui green approve inverted button" data-commit-type="publish">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal editUrlKeyPage">
+
+    <div class="header">
+        Edit Url Key
+    </div>
+    <div style="width:100%;padding:20px;">
+        <div style="padding:3px 20px;">
+            <b>Url:</b><span style="padding-left:15px;">/Page/</span> <input style="width:300px;" type="text" ng-model="selectedPage.urlKey" />
+            <div style="display:inline-block;" class="ui slider checkbox">
+                <input ng-model="selectedPage.active" type="checkbox" name="newsletter">
+                <label>Active</label>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="three fluid ui inverted buttons">
+            <div class="ui red cancel inverted button">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+
+            <div class="ui green approve inverted button" data-commit-type="publish">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".dropzone").dropzone({
+        url: "/api/Settings/UploadFile",
+        success: function (obj) {
+            $("#logoUrl").val(obj.xhr.response.replace('"', '').replace('"', ''));
+            $("#logoUrl").trigger('input');
+        }
+    });
+</script>
+

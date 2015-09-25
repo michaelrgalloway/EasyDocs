@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <base href="/" />
+	<meta charset="utf-8" />
+    <link href="/web/assets/styles/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.8/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.8/semantic.min.js"></script>
+    <link href="/web/assets/styles/site.css" rel="stylesheet" />
+    <script src="/web/libs/angular.min.js"></script>
+    <script src="/web/assets/scripts/bundle.js"></script>
+    <link href="/web/assets/scripts/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
+ 
+   
+</head>
+<body  data-ng-app="DocEasyApp" ng-controller="appController" ng-cloak>
+    <div class="slide-animate" ng-include="headerUrl" include-replace></div>
+    <div ng-show="headerloaded" style="width:100%; position:relative;">
+
+        <div id="leftTree"  style="border-right:#dcdcdc 1px solid; padding-top:60px; width:300px; position:fixed; height:100%;  left:0;">
+            <div style="margin-left:3em;" >
+                <div class="listHeader">
+                    <span class="nav-header"> Documentation</span>
+                   
+                </div>
+                <ul style="margin-top:0px;">
+                    <li ng-repeat="page in pages track by $index">
+                        <div class="nodeWrapper">
+                            <a href="" ng-href="/Page/{{page.urlKey}}">
+                                {{ page.title }}
+                            </a>
+                            
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="listHeader">
+                    <span class="nav-header"> Definitions</span>
+                  
+                </div>
+                <ul style="margin-top:0px;">
+                    <li ng-repeat="section in sections track by $index" ng-include="'/web/app/views/templates/treenode.html'"></li>
+                </ul>
+           
+               
+            </div>
+        </div>
+        <div style="position:absolute; top:0; left:300px; margin-right:300px;width: 100%;">
+            <div style="width:100%;">
+                <div data-ng-view="">
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+
+       
+
+    </div>
+    <!--<div style="clear:both;"></div>
+    <div id="footer" class="slide-animate" ng-include="footerUrl"></div>-->
+
+    <script>
+		(function($){
+			$(window).load(function(){
+
+			    $("#leftTree").mCustomScrollbar({
+			        theme: "dark",
+			        position: "left",
+			        scrollInertia:200
+				});
+
+			});
+			$(document).ready(function () {
+			   // $(".loader").hide();
+			});
+		})(jQuery);
+		
+
+    </script>
+    <div class="loader" >
+        <img src="/web/assets/img/713.GIF"/>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿
+
+
+<div style="width:100%; margin-right:600px; position:relative; padding-top:50px">
+    <div id="content" class="content" style="margin-right:600px;">
+        <button class="sectionEditButton" ng-click="editPage(page)">
+            <i class="edit icon"></i>
+        </button>
+        <button class="sectionEditButton" ng-click="editUrlKey()">
+            <i class="linkify icon"></i>
+        </button>
+        <div class="inner-content"  ng-bind-html="content"></div>
+    </div>
+    <div class="related" style="width: 300px;position:fixed; top:40px; right:0;min-height: 100%;padding:24px 10px;padding-top:37px; color:#fff">
+        <button class="sectionEditButton" ng-click="editSidebar(page)">
+            <i class="edit icon"></i>
+        </button>
+        <div class="inner-content" ng-bind-html="sidebarContent"></div>
+    </div>
+</div>
+
+
+<div style="clear:both;"></div>
+
+

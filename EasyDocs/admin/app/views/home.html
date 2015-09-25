@@ -1,0 +1,55 @@
+﻿
+
+   <div style="width:100%; margin-right:600px; position:relative; padding-top:50px">
+       <div id="content" class="content" style="margin-right:600px;">
+           
+           <button class="sectionEditButton" ng-click="editSection(section)">
+               <i class="edit icon"></i>
+           </button>
+           <button class="sectionEditButton" ng-click="editUrlKey()">
+               <i class="linkify icon"></i>
+           </button>
+          
+           <div class="sectionHeader" >{{section.title}}</div>
+           <div class="inner-content" ng-bind-html="content"></div>
+       </div>
+       <div class="related" style="width: 300px;position:fixed; top:40px; right:0;min-height: 100%;padding:24px 10px;padding-top:37px; color:#fff">
+           <button class="sectionEditButton" ng-click="editSidebar(section)">
+               <i class="edit icon"></i>
+           </button>
+         
+
+           
+           <div>
+               <span style="font-size:1.2em;">Downloads</span><br />
+               <a style="display:block;" target="_blank" ng-repeat="download in section.downloads" ng-href="{{download.url}}">
+                   <i class="download icon"></i> {{download.title}}
+               </a>
+             
+               <br /><br />
+           </div>
+           <div>
+               <span style="font-size:1.2em;">Articles</span><br />
+               <a style="display:block;" target="_blank" ng-repeat="article in section.articles" ng-href="{{article.url}}">
+                   <i class="download icon"></i> {{article.title}}
+               </a>
+
+               <br /><br />
+           </div>
+           <div>
+               <span style="font-size:1.2em;">Resources</span><br />
+               <a style="display:block;" target="_blank" ng-repeat="externalLink in section.externalLinks" ng-href="{{externalLink.url}}">
+                   <i class="download icon"></i> {{externalLink.title}}
+               </a>
+
+               <br /><br />
+           </div>
+          
+           <!--<i class="newspaper icon"></i> Blog Title<br />
+           <br />
+           <i class="external share icon"></i> Product page title - Kiosk Simple<br />-->
+       </div>
+</div>
+
+   
+    <div style="clear:both;"></div>
