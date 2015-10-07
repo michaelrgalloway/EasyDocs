@@ -4,11 +4,11 @@ app.config(function ($routeProvider, $locationProvider) {
     // enable html5Mode for pushstate ('#'-less URLs)
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
-    $routeProvider.when("/admin", {
-        controller: "homeController",
-        templateUrl: "/admin/app/views/home.html",
+    $routeProvider.when("/", {
+        controller: "pageController",
+        templateUrl: "/admin/app/views/page.html",
         caseInsensitiveMatch: true,
-        title: 'Home'
+        title: 'Page '
     });
     $routeProvider.when("/admin/Section/:sectionUrlKey", {
         controller: "homeController",
